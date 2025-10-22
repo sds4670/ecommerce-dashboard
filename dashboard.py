@@ -51,7 +51,8 @@ st.plotly_chart(fig2, use_container_width=True)
 
 # Customer table (sample)
 st.subheader("Sample Customers")
-st.dataframe(df_filtered.groupby('customerid').agg({'revenue':'sum','invoiceno':'nunique'}).reset_index().sort_values('revenue', ascending=False).head(10))
+st.dataframe(df_filtered.groupby('CustomerId').agg({'revenue':'sum','InvoiceNo':'nunique'}).reset_index().sort_values('revenue', ascending=False).head(10))
+
 
 
 
