@@ -6,12 +6,14 @@ import plotly.express as px
 st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
 st.title("🛍️ E-Commerce Analytics Dashboard")
 
+
 @st.cache_data
 def load_data():
-    df = pd.read_csv("cleaned_data.csv", parse_dates=['invoicedate'], low_memory=False)
-    df['month'] = df['invoicedate'].dt.to_period('M').astype(str)
-    df['revenue'] = df['quantity'] * df['unitprice']
+    df = pd.read_csv("cleaned_data.csv", parse_dates=['InvoiceDate'], low_memory=False)
+    df['month'] = df['InvoiceDate'].dt.to_period('M').astype(str)
+    df['revenue'] = df['Quantity'] * df['UnitPrice']
     return df
+
 
 df = load_data()
 
@@ -50,3 +52,4 @@ st.plotly_chart(fig2, use_container_width=True)
 # Customer table (sample)
 st.subheader("Sample Customers")
 st.dataframe(df_filtered.groupby('customerid').agg({'revenue':'sum','invoiceno':'nunique'}).reset_index().sort_values('revenue', ascending=False).head(10))
+
