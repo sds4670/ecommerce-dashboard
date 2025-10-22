@@ -32,9 +32,9 @@ if month != "All":
 # KPI cards
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Total Revenue", f"${df_filtered['revenue'].sum():,.0f}")
-col2.metric("Unique Customers", f"{df_filtered['customerid'].nunique()}")
-col3.metric("Avg Order Value", f"${df_filtered.groupby('invoiceno')['revenue'].sum().mean():.2f}")
-col4.metric("Repeat Rate", f"{(df_filtered.groupby('customerid')['invoiceno'].nunique() > 1).mean():.2%}")
+col2.metric("Unique Customers", f"{df_filtered['CustomerID'].nunique()}")
+col3.metric("Avg Order Value", f"${df_filtered.groupby('InvoiceNo')['revenue'].sum().mean():.2f}")
+col4.metric("Repeat Rate", f"{(df_filtered.groupby('CustomerID')['InvoiceNo'].nunique() > 1).mean():.2%}")
 
 # Monthly revenue chart
 st.subheader("Monthly Revenue")
@@ -52,5 +52,6 @@ st.plotly_chart(fig2, use_container_width=True)
 # Customer table (sample)
 st.subheader("Sample Customers")
 st.dataframe(df_filtered.groupby('customerid').agg({'revenue':'sum','invoiceno':'nunique'}).reset_index().sort_values('revenue', ascending=False).head(10))
+
 
 
