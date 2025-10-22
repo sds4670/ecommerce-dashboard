@@ -19,7 +19,7 @@ df = load_data()
 
 # Sidebar filters
 st.sidebar.header("Filters")
-country = st.sidebar.selectbox("Country", ["All"] + sorted(df['country'].dropna().unique().tolist()))
+country = st.sidebar.selectbox("Country", ["All"] + sorted(df['Country'].dropna().unique().tolist()))
 month = st.sidebar.selectbox("Month", ["All"] + sorted(df['month'].unique().tolist()))
 
 # Filter dataframe
@@ -52,4 +52,5 @@ st.plotly_chart(fig2, use_container_width=True)
 # Customer table (sample)
 st.subheader("Sample Customers")
 st.dataframe(df_filtered.groupby('customerid').agg({'revenue':'sum','invoiceno':'nunique'}).reset_index().sort_values('revenue', ascending=False).head(10))
+
 
