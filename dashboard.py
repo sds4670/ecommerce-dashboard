@@ -25,7 +25,7 @@ month = st.sidebar.selectbox("Month", ["All"] + sorted(df['month'].unique().toli
 # Filter dataframe
 df_filtered = df.copy()
 if country != "All":
-    df_filtered = df_filtered[df_filtered['country'] == country]
+    df_filtered = df_filtered[df_filtered['Country'] == Country]
 if month != "All":
     df_filtered = df_filtered[df_filtered['month'] == month]
 
@@ -44,14 +44,15 @@ st.plotly_chart(fig, use_container_width=True)
 
 # Top products
 st.subheader("Top Products by Quantity")
-top_products = df_filtered.groupby('description')['quantity'].sum().sort_values(ascending=False).head(10).reset_index()
-fig2 = px.bar(top_products, x='description', y='quantity')
+top_products = df_filtered.groupby('Description')['Quantity'].sum().sort_values(ascending=False).head(10).reset_index()
+fig2 = px.bar(top_products, x='Description', y='Quantity')
 fig2.update_xaxes(tickangle=45)
 st.plotly_chart(fig2, use_container_width=True)
 
 # Customer table (sample)
 st.subheader("Sample Customers")
 st.dataframe(df_filtered.groupby('customerid').agg({'revenue':'sum','invoiceno':'nunique'}).reset_index().sort_values('revenue', ascending=False).head(10))
+
 
 
 
